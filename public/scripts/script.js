@@ -1,7 +1,7 @@
 var matrix = [];
-var p = 40;
+var p =40;
 var m = 40;
-var r_side = 40;
+var r_side = 20;
 var xotArr = [];
 var EatGrassArr = [];
 var PredatorArr = [];
@@ -16,7 +16,7 @@ function setup() {
     }
     console.log(matrix);
 
-    frameRate(2);
+    frameRate(1.5);
     createCanvas(p * r_side, m * r_side);
     background('#acacac');
     for(var i = 0; i < matrix.length; i++){
