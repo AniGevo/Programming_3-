@@ -12,17 +12,9 @@ module.exports = class Grass extends LivingCreature {
 				var x = cord[0];
 				var y = cord[1];
 
-				var norXot = new Grass(x, y, this.index);
-				xotArr.push(norXot);
-
-				matrix[y][x] = 1;
+				matrix[y][x] = new Grass(x, y, 1);
 				this.multiply = 0;
 			}
 		}
 	}
-
-
 }
-
-
-

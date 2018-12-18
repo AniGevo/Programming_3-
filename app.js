@@ -1,40 +1,50 @@
 var express = require('express');
-var path = require('path');
 var app = express();
-var Matrix= require("./modules/matrix.js");
 
-// Define the port to run on
-app.set('port', process.env.PORT || 3000);
+var server = require('http').Server(app);
 
-app.use(express.static(path.join(__dirname, 'public')));
+var io = require('socket.io')(server);
 
-// Listen for requests
-var server = app.listen(app.get('port'), function() {
-  var port = server.address().port;
-  console.log('Magic happens on port ' + port);
+app.use(express.static("."));
+
+app.get('/', function (req, res) {
+  res.redirect('index.html');
+});
+
+server.listen(3000);
+
+var matrix = require("./modules/matrix.js");
+console.log(matrix);
+
+
+io.on('connection', function (socket) {
+  socket.emit("firstMatrix", matrix);
 });
 
 
-console.log(Matrix);
-
-// var Grass = require("./modules/class.grass.js");
-// var EatGrass = require("./modules/class.eatgrass.js");
-// var Predator = require("./modules/class.predator.js");
-// var Hunter= require("./modules/class.hunter.js");
-//var Matrix= require("./modules/matrix.js");
-//var LivingCreature = require("./modules/LivingCreature.js");
-
-
-var time = frameRate(5);
+/*var time = frameRate(5);
 
 function frameRate( frameCount){
   return 1000 / frameCount; 
 }
 
 function draw(){
-  for(var i in grass){
-    grass[i].mul();
-  }
 
-  
-} 
+
+  for (var i = 0; i < matrix.length; i++) {
+  for (var j = 0; j < matrix[i].length; j++) {
+    if (matrix[i][j] == 1) {
+      matrix[i][j].mul();
+    }
+    if (matrix[i][j] == 2) {
+      matrix[i][j].mul();
+    }
+    if (matrix[i][j] == 3) {
+      matrix[i][j].eat();
+    }
+    if (matrix[i][j] == 4) {
+      matrix[i][j].eat();
+    }
+  }
+}
+} */
